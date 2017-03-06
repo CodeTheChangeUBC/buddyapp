@@ -3,6 +3,9 @@
     <ion-title>
       MoonWalk
     </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="addMarker()"><ion-icon name="add"></ion-icon>Destination</button>
+    </ion-buttons>  
   </ion-navbar>
 </ion-header>
 
@@ -10,4 +13,3 @@
 <ion-content>
   <div #map id="map"></div>
 </ion-content>
-

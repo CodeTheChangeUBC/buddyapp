@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Geolocation } from 'ionic-native';
 import { NavController } from 'ionic-angular';
+import { TripPage } from '../trip/trip';
 
 declare var google;
 
@@ -15,7 +16,6 @@ export class Maps {
 
 
   constructor(public navCtrl: NavController) {
-    
   }
 
 ionViewDidLoad(){
@@ -67,6 +67,11 @@ addInfoWindow(marker, content){
     infoWindow.open(this.map, marker);
   });
  
+}
+
+/* TODO: Pass in trip destination as an argument */
+selectDestination(destination) {
+  this.navCtrl.push(TripPage, {destination: destination});
 }
 
 }

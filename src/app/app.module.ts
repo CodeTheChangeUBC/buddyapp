@@ -5,6 +5,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { Maps } from '../pages/maps/maps';
 import { TabsPage } from '../pages/tabs/tabs';
+import { TripPage } from '../pages/trip/trip';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { TabsPage } from '../pages/tabs/tabs';
     AboutPage,
     ContactPage,
     Maps,
-    TabsPage
+    TabsPage,
+    TripPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -23,7 +25,8 @@ import { TabsPage } from '../pages/tabs/tabs';
     AboutPage,
     ContactPage,
     Maps,
-    TabsPage
+    TabsPage,
+    TripPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      MoonWalk
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="addMarker()"><ion-icon name="add"></ion-icon>Destination</button>
+    </ion-buttons>  
+  </ion-navbar>
+</ion-header>
+
+<!-- Google Maps -->
+<ion-content>
+  <div #map id="map">
+  </div>
+    <button (click)="selectDestination(destination)" ion-button full>Walk Here</button>
+  <!-- TODO: Replace with walk-here button -->
+</ion-content>
+

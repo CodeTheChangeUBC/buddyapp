@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { TripPage } from '../trip/trip';
 
 /*
@@ -8,17 +8,44 @@ import { TripPage } from '../trip/trip';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+
+declare var google;
+
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html'
 })
+
 export class MapPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  @ViewChild('map') mapElement;
+  map: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
+    platform.ready().then(() => {
+    });
+  }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MapPage');
+    this.initMap();
   }
+
+  initMap() {
+
+
+
+      let latLng = new google.maps.LatLng(49.265661, -123.250332); // central UBC
+
+      let mapOptions = {
+        center: latLng,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+
+      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+  }
+
 
   selectDestination(destination) {
     this.navCtrl.push(TripPage, {destination: destination});

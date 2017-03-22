@@ -5,13 +5,17 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>distress</ion-title>
+    <ion-title>
+    distress
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="callUBCSecurity()">UBC Security</button>
+      <button ion-button (click)="callUBCSecurity()">UBC RCMP Non-Emergency</button>
+      <button ion-button (click)="callUBCSecurity()">911</button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
 

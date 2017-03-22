@@ -12,11 +12,16 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'trip.html'
 })
 export class TripPage {
+	trip;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TripPage');
+  }
+
+  selectGender() {
+
   }
 
 }

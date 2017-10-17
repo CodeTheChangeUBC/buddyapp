@@ -12,7 +12,7 @@ public class ReadDatabaseTest {
         String host = "moonwalk-1.postgres.database.azure.com";
         String database = "postgres";
         String user = "moonwalk@moonwalk-1";
-        String password = "";//add pass
+        String password = "";//add password
 
         // check that the driver is installed
         try

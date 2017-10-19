@@ -1,7 +1,31 @@
+const pg = require('pg');
 const express=require("express");
 var bodyParser=require('body-parser');
 
 const app = express();
+
+const   connection = {
+		host	: 'moonwalk-1.postgres.database.azure.com',
+		user: process.env.USER,
+		password: process.env.PASS,
+		database: 'postgres',
+		port: 5432,
+		ssl: true
+};
+
+
+const client = new pg.Client(connection);
+
+client.connect(function(err){
+	if(!err) {
+		    console.log("Database is connected");
+	} else {
+		    console.log("Error while connecting with database");
+	}
+});
+
+module.exports = client;
+
 
 var authenticateController=require('./controllers/authenticate-controller');
 var registerController=require('./controllers/register-controller');
@@ -48,9 +72,3 @@ function queryDatabase(response, callback){
 				console.log(err);
 			});
 }
-
-function sendResponse(response, returnString) {
-	console.log("callback execute");
-	response.end(returnString);
-}
-

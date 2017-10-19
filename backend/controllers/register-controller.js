@@ -1,4 +1,4 @@
-const client = require('./../config.js');
+const client = require('./../server.js');
 
 module.exports.register=function(req,res) {
 	var users={

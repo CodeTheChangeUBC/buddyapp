@@ -34,8 +34,24 @@ app.get('/test', function(request, response){
   queryDatabase(response, sendResponse);
 });
 
+app.get('/Registration/:name', function(req,res){
 
+  console.log(req.params.name);
+  queryDatabase(res, sendResponse);
+}
 
+app.get('/Login/:name', function(req,res){
+
+  console.log(req.params.name);
+  queryDatabase(res, sendResponse);
+}
+
+app.get('/Login/:password', function(req,res){
+
+  console.log(req.params.password);
+  queryDatabase(res, sendResponse);
+}
+        
 function queryDatabase(response, callback){
   console.log(`Running query to PostgreSQL server: ${config.host}`);
 

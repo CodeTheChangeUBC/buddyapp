@@ -42,7 +42,7 @@ router.get('/', function(req, res) {
 );
 
 
-/* route to handle login and registration */
+/* route to handle login and registration. */
 app.post('/api/register',registerController.register);
 app.post('/api/authenticate',authenticateController.authenticate);
 app.listen(8012);

@@ -18,8 +18,8 @@ npm-debug.log*
 .versions/
 coverage/
 dist/
--node_modules/
--backend/node_modules/
+node_modules/
+backend/node_modules/
 tmp/
 temp/
 hooks/

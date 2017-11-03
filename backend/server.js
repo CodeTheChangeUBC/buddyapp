@@ -29,6 +29,7 @@ module.exports = client;
 
 var authenticateController=require('./controllers/authenticate-controller');
 var registerController=require('./controllers/register-controller');
+var searchController=require('./controllers/search-controller');
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -45,6 +46,7 @@ router.get('/', function(req, res) {
 /* route to handle login and registration */
 app.post('/api/register',registerController.register);
 app.post('/api/authenticate',authenticateController.authenticate);
+app.post('/api/search',searchController.search);
 app.listen(8012);
 
 

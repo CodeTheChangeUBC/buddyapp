@@ -39,6 +39,7 @@ app.get('/Registration/:name', function(req,res){
 
 app.get('/Login/:name', function(req,res){
 
+<<<<<<< HEAD
   console.log(req.params.name);
   queryDatabase(res, sendResponse);
 }
@@ -48,7 +49,26 @@ app.get('/Login/:password', function(req,res){
   console.log(req.params.password);
   queryDatabase(res, sendResponse);
 }
+=======
+app.get('/Registration/:name', function(req,res){
 
+  console.log(req.params.name);
+  queryDatabase(res, sendResponse);
+}
+
+app.get('/Login/:name', function(req,res){
+
+  console.log(req.params.name);
+  queryDatabase(res, sendResponse);
+}
+
+app.get('/Login/:password', function(req,res){
+>>>>>>> refs/remotes/origin/harriwu
+
+  console.log(req.params.password);
+  queryDatabase(res, sendResponse);
+}
+        
 function queryDatabase(response, callback){
   console.log(`Running query to PostgreSQL server: ${config.host}`);
 

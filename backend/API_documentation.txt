@@ -1,4 +1,7 @@
-Login API Call
+Register API Call
+
+endpoint: POST to /api/register
+
 Post body format: (data to be send in "<>")
 {
   "username":<username>,
@@ -11,7 +14,10 @@ Post body format: (data to be send in "<>")
 
 -------------------------------------------
 
-Register API Call
+Authenticat API Call
+
+endpoint: POST to /api/authenticate
+
 Post body format: (data to be send in "<>")
 {
   "username":<username>,
@@ -21,6 +27,9 @@ Post body format: (data to be send in "<>")
 -------------------------------------------
 
 Search API Call
+
+endpoint: POST to /api/search
+
 Post body format: (data to be send in "<>")
 {
   "user_id":<user id>,

@@ -31,17 +31,26 @@ var authenticateController=require('./controllers/authenticate-controller');
 var registerController=require('./controllers/register-controller');
 var searchController=require('./controllers/search-controller');
 
-//So we can parse body data of http requests
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json());
+app.get('/Registration/:name', function(req,res){
 
-var router = express.Router();
+  console.log(req.params.name);
+  queryDatabase(res, sendResponse);
+}
 
-//test route
-router.get('/', function(req, res) {
-    res.json({ message: 'welcome to our upload module apis' });
-    }
-);
+app.get('/Login/:name', function(req,res){
+
+  console.log(req.params.name);
+  queryDatabase(res, sendResponse);
+}
+
+app.get('/Login/:password', function(req,res){
+
+  console.log(req.params.password);
+  queryDatabase(res, sendResponse);
+}
+
+function queryDatabase(response, callback){
+  console.log(`Running query to PostgreSQL server: ${config.host}`);
 
 
 /* routes to handle api requests using above controllers*/

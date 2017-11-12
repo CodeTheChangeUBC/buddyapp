@@ -41,4 +41,5 @@ function score(person1, person2) {
 
   if (!gender_match) return Number.NEGATIVE_INFINITY;
 
+  return Number.NEGATIVE_INFINITY;
 }

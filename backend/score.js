@@ -36,21 +36,22 @@ function Person(gender, gender_pref, time_start, time_end, start_lat, start_long
  */
 function score(person1, person2) {
   // stub
-  var gender_match = ((person1.gender_pref === person2.gender || person1.genderpref === 0) &&
-    (person1.gender === person2.gender_pref || person2.genderpref === 0));
+    var gender_match = ((person1.gender_pref === person2.gender || person1.genderpref === 0) &&
+                        (person1.gender === person2.gender_pref || person2.genderpref === 0));
 
-  if (!gender_match) return Number.NEGATIVE_INFINITY;
+    if (!gender_match) return Number.NEGATIVE_INFINITY;
 
-  var departure_overlap = ((person1.time_start <= person2.time_end && person2.start_time <= person1.time_end));
+    var departure_overlap = ((person1.time_start <= person2.time_end && person2.start_time <= person1.time_end));
+    
+    if (!departure_overlap) return Number.NEGATIVE_INFINITY;
 
-  // should we allow people to wait if they want to?
-  if (!departure_overlap) return Number.NEGATIVE_INFINITY;
+    var rating_score = 5 - Math.abs(person1.avg_rating - person2.avg_rating);
 
-  var rating_score = 5 - Math.abs(person1.avg_rating - person2.avg_rating);
+    var distance_overlap = 0;
 
-  var distance_overlap = 0;
-
-  return Number.NEGATIVE_INFINITY;
+    // stub
+    // return Number.NEGATIVE_INFINITY;
+    return rating_score + distance_overlap;
 }
 
 // https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula

@@ -45,13 +45,30 @@ function score(person1, person2) {
     
     if (!departure_overlap) return Number.NEGATIVE_INFINITY;
 
-    var rating_score = 5 - Math.abs(person1.avg_rating - person2.avg_rating);
+    var rating_score = Math.abs(person1.avg_rating - person2.avg_rating);
 
-    var distance_overlap = 0;
-
-    // stub
-    // return Number.NEGATIVE_INFINITY;
-    return rating_score + distance_overlap;
+    // x_1: distance between person1 start and person2 start
+    // x_2: distance between person1 start and person1 end
+    // x_3: distance between person2 start and person1 end
+    // x_4: distance between person1 start and person2 end
+    // x_5: distance between person2 start and person2 end
+    // x_6: distance between person1 end and person2 end
+    var x_1 = getDistanceFromLatLonInKm(person1.start_lat,person1.start_long,person2.start_lat,person2.start_long)
+    var x_2 = getDistanceFromLatLonInKm(person1.start_lat,person1.start_long,person1.dest_lat,person1.dest_long)
+    var x_3 = getDistanceFromLatLonInKm(person2.start_lat,person2.start_long,person1.dest_lat,person1.dest_long)
+    var x_4 = getDistanceFromLatLonInKm(person1.start_lat,person1.start_long,person2.dest_lat,person2.dest_long)
+    var x_5 = getDistanceFromLatLonInKm(person2.start_lat,person2.start_long,person2.dest_lat,person2.dest_long)
+    var x_6 = getDistanceFromLatLonInKm(person1.dest_lat,person1.dest_long,person2.dest_lat,person2.dest_long)
+    
+    // calculate the shortest trip where two people meet at one start location, leave each other at one dest location
+    var dist_total = x_1 + x_6 + Math.min(x_2,x_4,x_3,x_5)
+    
+    // compute ratio of two people taking trip together to each person travelling independently
+    // the closer to 1, the better
+    var distance_match = 2*dist_total/(x_2+x_5)
+    
+    // the smaller this number, the better the match
+    return rating_score + distance_match;
 }
 
 // https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula

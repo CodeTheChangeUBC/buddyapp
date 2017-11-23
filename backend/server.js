@@ -75,3 +75,93 @@ function queryDatabase(response, callback){
 				console.log(err);
 			});
 }
+
+//Returns an array of numbers representing a group. Can be empty if no acceptable matches are found.
+//Each number in the return is the row index of the selected individual in the maintained search matrix.
+//Does not modify the search matrix
+function searchMatrix(matrix, threshold){
+	var maxFound = threshold;
+	var row = -1;
+	var col = -1;
+	var group = [];
+	//~n^2/2 pass to find first pair
+	for (var i = 0; i < matrix.length; i++) {
+		for(var o = i+1; o < matrix[i].length; o++){
+				if (maxFound < matrix[i][o]){
+						maxFound = matrix[i][o];
+						row = i;
+						col = o;
+						}
+				}
+		}
+	//Check if we actually found a valid pair
+	if((col != -1 || row != -1) && maxFound > threshold){
+		//Add our new members to the group array
+		group.push(col);
+		group.push(row);
+		//Make 1d array of the mins across the 2 selected individuals and search for next, ignoring already added indexes
+		var mins = minsAcross(matrix[row], matrix[col]);
+		//Keep finding more individuals until there are no more that pass the threshold.
+		var bestFound = threshold;
+		var indexFound = -1;
+		var noMore = false;
+		for(int o = 0; o < mins.length; o++){
+			for(int i = 0; i < mins.length; i++){
+				if(!arrayContains(group, i)){
+					if(mins[i] > bestFound){
+						bestFound = mins[i];
+						indexFound = i;
+					}
+				}
+			}
+			if(bestFound == threshold){
+				return checkConditions(group);
+			}
+			if(bestFound > threshold){
+				mins = minsAcross(mins, matrix[indexFound]);
+				group.push(indexFound);
+				//reset
+				bestFound = threshold;
+				indexFound = -1;
+			}
+		}
+	}
+	//If we didn't find a valid pair, return empty array
+	return group;
+}
+
+//Returns true if given array contains number.
+//Returns false otherwise
+function arrayContains(array, number){
+	for(int i = 0; i < array.length; i++){
+		if(array[i] === number){
+			return true;
+		}
+	}
+	return false;
+}
+
+function checkConditions(array){
+	//TODO: Check conditions of selected individuals and return a refined array
+}
+
+//Takes 2 arrays of equal length and returns a single array of the mins across both arrays
+function minsAcross(row1, row2){
+	var ret = [];
+	for(int i = 0; i < row1.length; i++){
+		ret.push(Math.min(row1[i], row2[i]));
+	}
+	return ret;
+}
+
+//Remove a row from a 2d array
+function removeRow(array, row){
+		array.splice(row, 1);
+		return array;
+}
+//remove a col from a 2d array
+function removeCol(array, col){
+	for(var i = 0; i < array.length; i++){
+		array[i].splice(col, 1);
+	}
+}

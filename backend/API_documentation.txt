@@ -14,7 +14,7 @@ Post body format: (data to be send in "<>")
 
 -------------------------------------------
 
-Authenticat API Call
+Authenticate API Call
 
 endpoint: POST to /api/authenticate
 

@@ -5,24 +5,42 @@ var bodyParser=require('body-parser');
 const app = express();
 
 const   connection = {
+<<<<<<< HEAD
     host    : 'moonwalk-1.postgres.database.azure.com',
 user: process.env.USER,
 password: 'MoonPostgreSQL123)(*',
 database: 'postgres',
 port: 5432,
 ssl: true
+=======
+    host	: 'moonwalk-1.postgres.database.azure.com',
+    user: process.env.USER,
+    password: process.env.PASS,
+    database: 'postgres',
+    port: 5432,
+    ssl: true
+>>>>>>> 297fb7a8... modified tests and added date object
 };
 
 
 const client = new pg.Client(connection);
 
 client.connect(function(err){
+<<<<<<< HEAD
                if(!err) {
                console.log("Database is connected");
                } else {
                console.log("Error while connecting with database");
                }
                });
+=======
+    if(!err) {
+        console.log("Database is connected");
+    } else {
+        console.log("Error while connecting with database");
+    }
+});
+>>>>>>> 297fb7a8... modified tests and added date object
 
 module.exports = client;
 
@@ -39,9 +57,15 @@ var router = express.Router();
 
 //test route
 router.get('/', function(req, res) {
+<<<<<<< HEAD
            res.json({ message: 'welcome to our upload module apis' });
            }
            );
+=======
+        res.json({ message: 'welcome to our upload module apis' });
+    }
+);
+>>>>>>> 297fb7a8... modified tests and added date object
 
 
 /* routes to handle api requests using above controllers*/
@@ -59,6 +83,7 @@ function queryDatabase(response, callback){
     const query = 'SELECT * FROM inventory;';
 
     client.query(query)
+<<<<<<< HEAD
     .then(res => {
           const rows = res.rows;
           rows.map(row => {
@@ -74,6 +99,23 @@ function queryDatabase(response, callback){
     .catch(err => {
            console.log(err);
            });
+=======
+        .then(res => {
+            const rows = res.rows;
+            rows.map(row => {
+                JSONString += JSON.stringify(row);
+                //console.log(returnString);
+                //console.log('Read: ${JSON.stringify(row)}');
+            });
+
+            callback(response, JSONString);
+            //process.exit(); NOTE this terminates the server
+
+        })
+        .catch(err => {
+            console.log(err);
+        });
+>>>>>>> 297fb7a8... modified tests and added date object
 }
 
 var googleMapsClient = require('@google/maps').createClient({

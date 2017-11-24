@@ -25,7 +25,7 @@ describe('ScoreSpec', function() {
 /*        console.log("gender1", person1.gender);
         console.log("gender2", person2.gender);*/
         var value = score(person1, person2);
-        var expectedValue = Number.NEGATIVE_INFINITY;
+        var expectedValue = Number.POSITIVE_INFINITY;
         console.log("Value for test " + count++ + ": "+ value);
         value.should.equal(expectedValue);
     });
@@ -38,7 +38,7 @@ describe('ScoreSpec', function() {
         console.log("time_end1 " + person1.time_end);
         console.log("time_start2 " + person2.time_start);
         console.log("time_end2 " + person2.time_end);*/
-        var expectedValue = Number.NEGATIVE_INFINITY;
+        var expectedValue = Number.POSITIVE_INFINITY;
         console.log("Value for test " + count++ + ": "+ value);
         value.should.equal(expectedValue);
     });
@@ -49,7 +49,7 @@ describe('ScoreSpec', function() {
 /*        console.log("gender1", person1.gender);
         console.log("time_start " + person1.time_start);
         console.log("time_end " + person1.time_end);*/
-        var expectedValue = 1;
+        var expectedValue = 0;
         console.log("Value for test " + count++ + ": "+ value);
         value.should.equal(expectedValue);
     });

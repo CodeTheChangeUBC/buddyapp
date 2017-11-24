@@ -32,19 +32,19 @@ module.exports = Person;
  * @param {Person} person1
  * @param {Person} person2
  * @return {Number} score
- *      score is a number between Number.NEGATIVE_INFINITY and 1
- *          Number.NEGATIVE_INFINITY: means the two people are incompatible
+ *      score is a number between 0 and Number.POSITIVE_INFINITY
+ *          Number.POSITIVE_INFINITY: means the two people are incompatible
  *          1: means the two people are a perfect match
  */
 function score(person1, person2) {
     var gender_match = ((person1.gender_pref === person2.gender || person1.genderpref === 0) &&
                         (person1.gender === person2.gender_pref || person2.genderpref === 0));
 
-    if (!gender_match) return Number.NEGATIVE_INFINITY;
+    if (!gender_match) return Number.POSITIVE_INFINITY;
 
     var departure_overlap = ((person1.time_start <= person2.time_end && person2.time_start <= person1.time_end));
 
-    if (!departure_overlap) return Number.NEGATIVE_INFINITY;
+    if (!departure_overlap) return Number.POSITIVE_INFINITY;
 
     var rating_score = Math.abs(person1.avg_rating - person2.avg_rating);
     console.log("rating_score: " + rating_score);
@@ -85,12 +85,12 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
     var a =
     Math.sin(dLat/2) * Math.sin(dLat/2) +
     Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-    ;
+    Math.sin(dLon/2) * Math.sin(dLon/2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     var d = R * c; // Distance in km
     return d;
 }
 
-  return Number.NEGATIVE_INFINITY;
+function deg2rad(deg) {
+    return deg * (Math.PI/180)
 }

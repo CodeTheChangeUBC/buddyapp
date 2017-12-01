@@ -37,6 +37,9 @@ module.exports = Person;
  *          1: means the two people are a perfect match
  */
 function score(person1, person2) {
+
+    if (person1 === person2) return Number.POSITIVE_INFINITY;
+
     var gender_match = ((person1.gender_pref === person2.gender || person1.genderpref === 0) &&
                         (person1.gender === person2.gender_pref || person2.genderpref === 0));
 
@@ -47,7 +50,7 @@ function score(person1, person2) {
     if (!departure_overlap) return Number.NEGATIVE_INFINITY;
 
     var rating_score = Math.abs(person1.avg_rating - person2.avg_rating);
-    console.log("rating_score: " + rating_score);
+    // console.log("rating_score: " + rating_score);
 
     // x_1: distance between person1 start and person2 start
     // x_2: distance between person1 start and person1 end
@@ -68,7 +71,7 @@ function score(person1, person2) {
 
     // compute ratio of two people taking trip together to each person travelling independently
     // the closer to 1, the better
-    var distance_match = 2*dist_total/(x_2+x_5);
+    var distance_match = (x_2+x_5)/(2*dist_total);
     console.log("distance_match: " + distance_match);
 
     // the larger this number, the better the match

@@ -55,30 +55,37 @@ describe('ScoreSpec', function() {
         value.should.equal(expectedValue);
     });
 
-    it('should return high score for compatible gender pref and short distance from each other and destination', function()  {
+    it('score should decrease as distance from each other increases', function()  {
         var person1 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.987, -130.123, 48.193, -130.122, 5);
         var person2 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.986, -130.122, 48.190, -130.121, 5);
         /*        console.log("gender1", person1.gender);
                 console.log("gender2", person2.gender);*/
-        var value = score(person1, person2);
+        var value1 = score(person1, person2);
         // var expectedValue = Number.NEGATIVE_INFINITY;
-        console.log("Value for test " + count++ + ": "+ value);
+        console.log("Value for test " + count++ + ": "+ value1);
         // value.should.equal(expectedValue);
-        expect(value).to.be.within(0, Number.POSITIVE_INFINITY);
-    });
+        value1.should.be.within(0, Number.POSITIVE_INFINITY);
 
-    it('should return low score for compatible gender pref and large distance from each other and destination', function()  {
-        var person1 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 50.987, -130.123, 49.193, -130.122, 5);
-        var person2 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.986, -130.122, 48.190, -130.121, 5);
-        /*        console.log("gender1", person1.gender);
-                console.log("gender2", person2.gender);*/
-        var value = score(person1, person2);
-        // var expectedValue = Number.NEGATIVE_INFINITY;
-        console.log("Value for test " + count++ + ": "+ value);
-        // value.should.equal(expectedValue);
-        expect(value).to.be.within(0, Number.POSITIVE_INFINITY);
-    });
+      var person3 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 50.987, -130.123, 49.193, -130.122, 5);
+      var person4 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.986, -130.122, 48.190, -130.121, 5);
+      /*        console.log("gender1", person1.gender);
+              console.log("gender2", person2.gender);*/
+      var value2 = score(person3, person4);
+      // var expectedValue = Number.NEGATIVE_INFINITY;
+      console.log("Value for test " + count++ + ": "+ value2);
+      // value.should.equal(expectedValue);
+      value2.should.be.below(value1);
 
+      var person5 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 51.987, -130.123, 49.193, -130.122, 5);
+      var person6 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.986, -130.122, 48.190, -130.121, 5);
+      /*        console.log("gender1", person1.gender);
+              console.log("gender2", person2.gender);*/
+      var value3 = score(person5, person6);
+      // var expectedValue = Number.NEGATIVE_INFINITY;
+      console.log("Value for test " + count++ + ": "+ value3);
+      // value.should.equal(expectedValue);
+      value3.should.be.below(value2);
+    });
 
 
 });

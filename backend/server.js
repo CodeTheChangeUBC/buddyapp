@@ -75,7 +75,6 @@ function queryDatabase(response, callback){
         });
 }
 
-<<<<<<< HEAD
 //Returns an array of numbers representing a group. Can be empty if no acceptable matches are found.
 //Each number in the return is the row index of the selected individual in the maintained search matrix.
 //Does not modify the search matrix
@@ -165,7 +164,7 @@ function removeCol(array, col){
 		array[i].splice(col, 1);
 	}
 }
-=======
+
 var googleMapsClient = require('@google/maps').createClient({
   key: 'AIzaSyAsn8mQ2wJcM2jQWD8ByBQ1_0aoW4gARP0'
 });
@@ -178,4 +177,3 @@ googleMapsClient.geocode({
     console.log(response.json.results);
   }
 });
->>>>>>> master

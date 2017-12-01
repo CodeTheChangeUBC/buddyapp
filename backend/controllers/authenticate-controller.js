@@ -5,6 +5,7 @@ module.exports.authenticate=function(request,response){
 	var password = request.body.pw_hash; // Make the password first_name for now until we implement the encryption
 
 	client.query("SELECT * FROM users WHERE username = ($1)", [username]).then(res => {
+		console.log(res);
 		var rows = res.rows;
 		if(rows.length > 0){
 			if(password==res.rows[0].pw_hash){

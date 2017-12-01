@@ -43,16 +43,42 @@ describe('ScoreSpec', function() {
         value.should.equal(expectedValue);
     });
 
-    it('should return 1 for perfect match', function()  {
+    it('should return positive infinity for perfect match', function()  {
         var person1 = new Person("female", "female", "2017-10-19 19:00:00", "2017-10-19 20:00:00", 49.987, -130.123, 48.193, -130.122, 5);
         var value = score(person1, person1);
 /*        console.log("gender1", person1.gender);
         console.log("time_start " + person1.time_start);
         console.log("time_end " + person1.time_end);*/
-        var value = score(person1, person2);
+        var value = score(person1, person1);
         var expectedValue = Number.POSITIVE_INFINITY;
         console.log("Value for test " + count++ + ": "+ value);
         value.should.equal(expectedValue);
     });
+
+    it('should return high score for compatible gender pref and short distance from each other and destination', function()  {
+        var person1 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.987, -130.123, 48.193, -130.122, 5);
+        var person2 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.986, -130.122, 48.190, -130.121, 5);
+        /*        console.log("gender1", person1.gender);
+                console.log("gender2", person2.gender);*/
+        var value = score(person1, person2);
+        // var expectedValue = Number.NEGATIVE_INFINITY;
+        console.log("Value for test " + count++ + ": "+ value);
+        // value.should.equal(expectedValue);
+        expect(value).to.be.within(0, Number.POSITIVE_INFINITY);
+    });
+
+    it('should return low score for compatible gender pref and large distance from each other and destination', function()  {
+        var person1 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 50.987, -130.123, 49.193, -130.122, 5);
+        var person2 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.986, -130.122, 48.190, -130.121, 5);
+        /*        console.log("gender1", person1.gender);
+                console.log("gender2", person2.gender);*/
+        var value = score(person1, person2);
+        // var expectedValue = Number.NEGATIVE_INFINITY;
+        console.log("Value for test " + count++ + ": "+ value);
+        // value.should.equal(expectedValue);
+        expect(value).to.be.within(0, Number.POSITIVE_INFINITY);
+    });
+
+
 
 });

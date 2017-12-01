@@ -20,6 +20,7 @@
     "dependencies": {
         "@google/maps": "^0.4.5",
         "body-parser": "^1.18.2",
+        "chai": "^4.1.2",
         "express": "^4.16.2",
         "jsonwebtoken": "^7.3.0",
         "pg": "^7.3.0"

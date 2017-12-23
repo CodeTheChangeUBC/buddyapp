@@ -30,6 +30,8 @@ module.exports = client;
 var authenticateController=require('./controllers/authenticate-controller');
 var registerController=require('./controllers/register-controller');
 var searchController=require('./controllers/search-controller');
+var sendEmailController = require('./controllers/send-email-controller');
+var sendTextController = require('./controllers/send-text-controller');
 
 //So we can parse body data of http requests
 app.use(bodyParser.urlencoded({extended:true}));
@@ -44,9 +46,11 @@ router.get('/', function(req, res) {
 );
 
 /* routes to handle api requests using above controllers*/
-app.post('/api/register',registerController.register);
-app.post('/api/authenticate',authenticateController.authenticate);
-app.post('/api/search',searchController.search);
+app.post('/api/register', registerController.register);
+app.post('/api/authenticate', authenticateController.authenticate);
+app.post('/api/search', searchController.search);
+app.post('/api/email', sendEmailController.sendEmail);
+app.post('/api/text', sendTextController.sendText);
 app.listen(8012);
 
 

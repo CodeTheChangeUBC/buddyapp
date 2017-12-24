@@ -1,47 +1,27 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
-  "private": true,
-  "scripts": {
-    "clean": "ionic-app-scripts clean",
-    "build": "ionic-app-scripts build",
-    "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
-  },
+  "name": "moonwalk",
+  "version": "1.0.0",
+  "description": "Moonwalk, a mobile application, will help students form pairs or groups so that they can walk home together after dark. Since many  students who prefer to work at the library feel unsafe walking alone on campus, this app would allow them to conveniently meet others  who are taking a similar route at a similar time, and contribute together to making UBC a safer campus for everyone.",
+  "main": "server.js",
   "dependencies": {
-    "@angular/common": "2.4.8",
-    "@angular/compiler": "2.4.8",
-    "@angular/compiler-cli": "2.4.8",
-    "@angular/core": "2.4.8",
-    "@angular/forms": "2.4.8",
-    "@angular/http": "2.4.8",
-    "@angular/platform-browser": "2.4.8",
-    "@angular/platform-browser-dynamic": "2.4.8",
-    "@angular/platform-server": "2.4.8",
-    "@ionic-native/core": "3.1.0",
-    "@ionic-native/splash-screen": "3.1.0",
-    "@ionic-native/status-bar": "3.1.0",
-    "@ionic/storage": "2.0.0",
-    "@types/google-maps": "^3.2.0",
-    "ionic-angular": "2.2.0",
-    "ionicons": "3.0.0",
-    "rxjs": "5.0.1",
-    "sw-toolbox": "3.4.0",
-    "zone.js": "0.7.2"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "nodemailer": "^4.4.1",
+    "pg": "^7.4.0",
+    "twilio": "^3.11.0"
   },
-  "devDependencies": {
-    "@ionic/app-scripts": "1.1.4",
-    "typescript": "2.0.9"
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "cordovaPlugins": [
-    "cordova-plugin-whitelist",
-    "cordova-plugin-console",
-    "cordova-plugin-statusbar",
-    "cordova-plugin-device",
-    "ionic-plugin-keyboard",
-    "cordova-plugin-splashscreen"
-  ],
-  "cordovaPlatforms": [],
-  "description": "buddyapp: An Ionic project"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeTheChangeUBC/buddyapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodeTheChangeUBC/buddyapp/issues"
+  },
+  "homepage": "https://github.com/CodeTheChangeUBC/buddyapp#readme"
 }

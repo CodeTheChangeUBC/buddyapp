@@ -45,6 +45,12 @@ router.get('/', function(req, res) {
     }
 );
 
+// send location of match to client
+app.get('/location', function () {
+
+});
+
+
 /* routes to handle api requests using above controllers*/
 app.post('/api/register', registerController.register);
 app.post('/api/authenticate', authenticateController.authenticate);

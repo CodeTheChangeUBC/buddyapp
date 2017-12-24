@@ -11,5 +11,8 @@ module.exports.sendText = function (req, res) {
     to: req.body.to,  // Text this number
     from: req.body.from // From a valid Twilio number
   })
-    .then((message) => console.log(message.sid));
+    .then((err, message) => {
+      if (err) res.json(400, 'unable to send text');
+      else res.json(200, 'sent message: ' + message);
+    });
 };

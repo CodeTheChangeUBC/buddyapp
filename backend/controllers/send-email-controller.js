@@ -14,12 +14,12 @@ module.exports.sendEmail = function(req, res) {
   transporter.sendMail(mailOptions, function(error){
     if(error){
       res.json({
-        status:false,
+        status: 400,
         message: 'there was some error with search query'});
     }
     else res.json({
-        status: true,
-        message: 'email send successfully'
+        status: 200,
+        message: 'email sent successfully'
       });
   });
 };

@@ -38,44 +38,44 @@ module.exports = Person;
  */
 function score(person1, person2) {
 
+    // for same person, return positive infinity
     if (person1 === person2) return Number.POSITIVE_INFINITY;
 
+    // GENDER MATCH
     var gender_match = ((person1.gender_pref === person2.gender || person1.genderpref === 0) &&
                         (person1.gender === person2.gender_pref || person2.genderpref === 0));
 
     if (!gender_match) return Number.NEGATIVE_INFINITY;
 
+    // DEPARTURE OVERLAP
     var departure_overlap = ((person1.time_start <= person2.time_end && person2.time_start <= person1.time_end));
 
     if (!departure_overlap) return Number.NEGATIVE_INFINITY;
 
-    var rating_score = Math.abs(person1.avg_rating - person2.avg_rating);
-    // console.log("rating_score: " + rating_score);
+    // RATING MATCH
+    // between 0 (bad) and 1 (good)
+    var rating_score = (5 - Math.abs(person1.avg_rating - person2.avg_rating))/5;
 
-    // x_1: distance between person1 start and person2 start
-    // x_2: distance between person1 start and person1 end
-    // x_3: distance between person2 start and person1 end
-    // x_4: distance between person1 start and person2 end
-    // x_5: distance between person2 start and person2 end
-    // x_6: distance between person1 end and person2 end
-    var x_1 = getDistanceFromLatLonInKm(person1.start_lat,person1.start_long,person2.start_lat,person2.start_long)
-    var x_2 = getDistanceFromLatLonInKm(person1.start_lat,person1.start_long,person1.dest_lat,person1.dest_long)
-    var x_3 = getDistanceFromLatLonInKm(person2.start_lat,person2.start_long,person1.dest_lat,person1.dest_long)
-    var x_4 = getDistanceFromLatLonInKm(person1.start_lat,person1.start_long,person2.dest_lat,person2.dest_long)
-    var x_5 = getDistanceFromLatLonInKm(person2.start_lat,person2.start_long,person2.dest_lat,person2.dest_long)
-    var x_6 = getDistanceFromLatLonInKm(person1.dest_lat,person1.dest_long,person2.dest_lat,person2.dest_long)
+    // TRIP OVERLAP
+    // between 0 (bad) and 1 (good)
+    var x_1 = getDistanceFromLatLonInKm(person1.start_lat,person1.start_long,person2.start_lat,person2.start_long)      // distance between person1 start and person2 start
+    var x_2 = getDistanceFromLatLonInKm(person1.start_lat,person1.start_long,person1.dest_lat,person1.dest_long)        // distance between person1 start and person1 end
+    var x_3 = getDistanceFromLatLonInKm(person2.start_lat,person2.start_long,person1.dest_lat,person1.dest_long)        // distance between person2 start and person1 end
+    var x_4 = getDistanceFromLatLonInKm(person1.start_lat,person1.start_long,person2.dest_lat,person2.dest_long)        // distance between person1 start and person2 end
+    var x_5 = getDistanceFromLatLonInKm(person2.start_lat,person2.start_long,person2.dest_lat,person2.dest_long)        // distance between person2 start and person2 end
+    var x_6 = getDistanceFromLatLonInKm(person1.dest_lat,person1.dest_long,person2.dest_lat,person2.dest_long)          // distance between person1 end and person2 end
 
     // calculate the shortest trip where two people meet at one start location, leave each other at one dest location
     var dist_total = x_1 + x_6 + Math.min(x_2,x_4,x_3,x_5);
     console.log("dist_total: " + dist_total);
 
-    // compute ratio of two people taking trip together to each person travelling independently
-    // the closer to 1, the better
-    var distance_match = (x_2+x_5)/(2*dist_total);
+    // compute ratio of distance travelled for each person travelling independently to two people taking trip together
+    var distance_match = (2*dist_total)/(x_2+x_5);
     console.log("distance_match: " + distance_match);
 
-    // the larger this number, the better the match
-    return rating_score + distance_match;
+    // COMPUTE SCORE
+    // between 0 (bad) and 1 (good)
+    return rating_score * 0.2 + distance_match * 0.8;
 }
 
 module.exports = score;

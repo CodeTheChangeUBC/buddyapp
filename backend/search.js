@@ -24,12 +24,14 @@ function searchMatrix(arr, threshold){
 	var maxFound = threshold;
 	var user1 = null;
 	var user2 = null;
+	var ind1 = null;
+	var ind2 = null;
 	var group = [];
 	//~n^2/2 pass to find first pair
-	for (var i = 0; i < arr.length; i++) {
+	for(var i = 0; i < arr.length; i++) {
 		for(var o = i+1; o < arr.length; o++){
 			var score = arr[i].data[o];
-				if (score > maxFound){
+				if (score > maxFound && (arr[i].walkAlone == 1 || arr[o].walkAlone == 1)){
 						maxFound = score;
 						user1 = arr[i];
 						user2 = arr[o];
@@ -72,8 +74,6 @@ function searchMatrix(arr, threshold){
 	return group;
 }
 
-module.exports.searchMatrix = searchMatrix;
-module.exports.User = User;
 
 //---------------------------------------Helper Methods--------------------------------
 
@@ -120,7 +120,7 @@ function checkSize(array){
 	//If it is valid, return.
 	//else remove the last element and keep checking.
 	for(var i = array.length - 1; i > -1; i--){
-		if(array.[i].size <= i+1){
+		if(array[i].size <= i+1){
 			return array;
 		}
 		else{
@@ -142,4 +142,15 @@ function minsAcross(row1, row2){
 		ret.push(Math.min(row1[i], row2[i]));
 	}
 	return ret;
+}
+
+module.exports = {
+	searchMatrix,
+	User,
+	arrayContains,
+	checkConditions,
+	checkWalkAlone,
+	checkSize,
+	removeIndex,
+	minsAcross
 }

@@ -1,5 +1,28 @@
 {
-  "scripts": {
-    "test": "jest"
-  }
-}
+     "name": "linode-test",
+     "version": "1.0.0",
+     "description": "",
+     "main": "server.js",
+     "scripts": {
+         "test": "echo \"Error: no test specified\" && exit 1",
+         "start": "node server.js"
+     },
+     "repository": {
+         "type": "git",
+         "url": "git+https://github.com/jeffjyang/linode-test.git"
+     },
+     "author": "",
+     "license": "ISC",
+     "bugs": {
+         "url": "https://github.com/jeffjyang/linode-test/issues"
+     },
+     "homepage": "https://github.com/jeffjyang/linode-test#readme",
+      "dependencies": {
+          "@google/maps": "^0.4.5",
+          "body-parser": "^1.18.2",
+          "chai": "^4.1.2",
+          "express": "^4.16.2",
+          "jsonwebtoken": "^7.3.0",
+          "pg": "^7.3.0"
+     }
+ }

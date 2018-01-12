@@ -32,14 +32,11 @@ module.exports = Person;
  * @param {Person} person1
  * @param {Person} person2
  * @return {Number} score
- *      score is a number between 0 and Number.POSITIVE_INFINITY
- *          Number.POSITIVE_INFINITY: means the two people are incompatible
+ *      score is a number between 0 and 1, or NEGATIVE_INFINITY
+ *          Number.NEGATIVE_INFINITY: means the two people are incompatible
  *          1: means the two people are a perfect match
  */
 function score(person1, person2) {
-
-    // for same person, return positive infinity
-    if (person1 === person2) return Number.POSITIVE_INFINITY;
 
     // GENDER MATCH
     var gender_match = ((person1.gender_pref === person2.gender || person1.genderpref === 0) &&

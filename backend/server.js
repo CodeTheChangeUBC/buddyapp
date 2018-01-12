@@ -5,7 +5,7 @@ var bodyParser=require('body-parser');
 const app = express();
 
 const connection = {
-    host	: 'moonwalk-1.postgres.database.azure.com',
+    host	: 'moonwalk-db.cciaciynavwo.us-east-2.rds.amazonaws.com',
     user: process.env.USER,
     password: process.env.PASS,
     database: 'postgres',

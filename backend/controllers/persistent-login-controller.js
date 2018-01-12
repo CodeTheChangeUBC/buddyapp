@@ -8,10 +8,11 @@ TODO json username, auth_token, device_id
 // TODO LOL 20 char VARCHAR 255 for auth_token
 
 // TODO move to server.js???????????????????????????????????????????????????????????????
-var sqlite3 = require('sqlite3').verbose(); // why verbose
-var db = new sqlite3.Database('PersistentLogin.db');
+//var sqlite3 = require('sqlite3').verbose(); // why verbose
+//var db = new sqlite3.Database('PersistentLogin.db');
 
 
+/* NOTE should be not needed since login handled elsewhere
 module.exports.loggedin = function (req,res) {
   var login = {
     "username": req.body.username,
@@ -47,10 +48,32 @@ module.exports.loggedin = function (req,res) {
     })
   }
 
-
 }
+*/
 
+// verify persistent login token
+// return true if token valid, false otherwise
+// id is integer, user id
+// token is string, login token
+function verifyToken(id, token) {
 
+    const query = {
+      text: 'SELECT auth_token FROM users WHERE id = $1',
+      values: [id]
+    }
+
+    client.query(query, (err, res) => {
+      if (err) {
+        console.log(err.stack)
+      } else {
+        if (token.equals(err.auth_token)) {
+          return true;  // TODO verf this true bubbles out
+        } else {
+          return false;
+        }
+      }
+    });
+}
 
 
 // generate random string 20 chars

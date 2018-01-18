@@ -1,7 +1,7 @@
 "use strict";
 
 var safewalkHubDict = [];
-
+// Lat, Lon, letters and index all from https://www.ams.ubc.ca/services/safewalk/
 safewalkHubDict[1] = {lat: 49.2580479, lon: -123.2530564} // A
 safewalkHubDict[2] = {lat: 49.2617345, lon: -123.2551646} // B
 safewalkHubDict[3] = {lat: 49.2634393, lon: -123.2557118} // C

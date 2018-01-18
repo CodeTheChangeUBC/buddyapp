@@ -1,4 +1,5 @@
-To run the tests:
+To run the tests: (I think)
 1. Go to /buddyapp/backend in terminal (cd ~/buddyapp/backend if you have the repo in your home directory)
 2. Run: npm install -g mocha
+3. Run: npm install chai
 3. To run "ScoreSpec.js," run: mocha ScoreSpec.js

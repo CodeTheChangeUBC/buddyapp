@@ -1,11 +1,12 @@
 const pg = require('pg');
 const express=require("express");
 var bodyParser=require('body-parser');
+const search=require('./search.js');
 
 const app = express();
 
 const connection = {
-    host	: 'moonwalk-1.postgres.database.azure.com',
+    host	: 'moonwalk-db.cciaciynavwo.us-east-2.rds.amazonaws.com',
     user: process.env.USER,
     password: process.env.PASS,
     database: 'postgres',
@@ -20,7 +21,7 @@ client.connect(function(err){
     if(!err) {
         console.log("Database is connected");
     } else {
-        console.log("Error while connecting with database");
+        console.log("Error while connecting with database" + err);
     }
 });
 
@@ -74,6 +75,15 @@ function queryDatabase(response, callback){
             console.log(err);
         });
 }
+
+//Call search every 5 minutes
+//TODO: Implement datab
+setInterval(function(){
+//Grab user data from database and create array  
+//Function to grab threshold
+//var group = search.searchMatrix(arr, threshold);
+//function to send off the group (Must communicate with frontend)
+}, 300000);
 
 var googleMapsClient = require('@google/maps').createClient({
   key: 'AIzaSyAsn8mQ2wJcM2jQWD8ByBQ1_0aoW4gARP0'

@@ -37,3 +37,24 @@ function randString() {
 
   return text;
 }
+
+function replaceJSONToken(String newToken) {
+	client.query('INSERT INTO users(JWT) values($1)',
+		    [newToken], 
+		    function(error,results,fields) {
+			if(error) {
+				console.log("JWT Replace error", error);
+				res.json({
+					status:false,
+					message:'there is an error with JWT insert'
+				})
+			}else {
+				res.json({
+					status:true,
+					data:results,
+					message:'sucessfully replace token'
+				})
+			}
+		});
+	
+}

@@ -1,5 +1,7 @@
 var client = require('./../server.js');
 var score = require('./../score.js');
+
+//Grabs search data from db and returns an array of User objects populated with score data.
 module.exports.getSearchData = function(){
 	client.query("SELECT * FROM search").then(res => {
 		var rows = res.rows

@@ -3,7 +3,7 @@ var client = require('./../server.js');
 var nJwt = require('njwt');
 const uuid = require('uuid/v4')
 
-module.exports.authenticate=function(request,response){
+module.exports.authenticateLogin=function(request,response){
 	var username = request.body.username;
 	var password = request.body.pw_hash; // Make the password first_name for now until we implement the encryption
 
@@ -46,4 +46,26 @@ module.exports.authenticate=function(request,response){
 		console.log(err);
 		response.sendStatus(500);
 	});
+}
+
+
+
+// middleware to authenticate an api call
+module.exports.authenticateApi = function(request, response, next) {
+  console.log("authenticating api call");
+
+  console.log(request.body.jwt);
+
+  // TODO need to fetch secret key for user to decrypt jwt
+  server.jwt.verify(request.body.jwt, 'TODOGetSecretKeyForUser', function(err, decoded) {
+    if (err) {
+      console.log("Error decoding token");
+    } else {
+      console.log("Successfully decoded");
+      // Add decrypted jwt token to pass on to func in case we need it, though we
+      // probably can omit this 
+      request.decoded = decoded;
+      return next();
+    }
+  });
 }

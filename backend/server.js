@@ -46,8 +46,11 @@ router.get('/', function(req, res) {
 
 /* routes to handle api requests using above controllers*/
 app.post('/api/register',registerController.register);
-app.post('/api/authenticate',authenticateController.authenticate);
-app.post('/api/search',searchController.search);
+app.post('/api/authenticate',authenticateController.authenticateLogin);
+
+// TODO pass all API calls through middleware authenticateController.authenticateApi
+// to verify JWT before continuing, done to secure endpoints
+app.post('/api/search', authenticateController.authenticateApi ,searchController.search);
 app.listen(8012);
 
 
@@ -79,7 +82,7 @@ function queryDatabase(response, callback){
 //Call search every 5 minutes
 //TODO: Implement datab
 setInterval(function(){
-//Grab user data from database and create array  
+//Grab user data from database and create array
 //Function to grab threshold
 //var group = search.searchMatrix(arr, threshold);
 //function to send off the group (Must communicate with frontend)

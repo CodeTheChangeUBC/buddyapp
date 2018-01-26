@@ -25,6 +25,7 @@
     "@ionic-native/status-bar": "3.1.0",
     "@ionic/storage": "2.0.0",
     "@types/google-maps": "^3.2.0",
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "install": "^0.10.2",
     "ionic-angular": "2.2.0",

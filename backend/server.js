@@ -2,6 +2,9 @@ const pg = require('pg');
 const express=require("express");
 var bodyParser=require('body-parser');
 const search=require('./search.js');
+const bcrypt = require('bcrypt');
+module.exports.bcrypt = bcrypt;
+
 
 const app = express();
 

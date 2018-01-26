@@ -71,7 +71,7 @@ function score(person1, person2) {
     console.log("dist_total: " + dist_total);
 
     // compute ratio of distance travelled for each person travelling independently to two people taking trip together
-    var distance_match = (2*dist_total)/(x_2+x_5);
+    var distance_match = (x_2+x_5)/(2*dist_total);
     console.log("distance_match: " + distance_match);
 
     // COMPUTE SCORE

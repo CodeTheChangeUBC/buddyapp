@@ -50,6 +50,50 @@ module.exports.authenticateLogin=function(request,response){
 
 
 
+
+// TODO replace current login function with this?
+// will need to rename authenticateLogin2 -> authenticateLogin
+// middleware to authenticate a login, doesnt need JWT, just password
+module.exports.authenticateLogin2 = function(request, response, next) {
+
+  var username = request.body.username;
+	var password = request.body.pw_hash;
+  console.log("authenticating login");
+//  server.db.all("SELECT pwhash FROM users WHERE email = ?", request.body.email, function(err, rows) {
+  client.query("SELECT * FROM users WHERE username = ($1)", [username]).then(res => {
+    if (err) {
+      console.log("err")
+      console.log(err.stack);
+    } else {
+      console.log("verifying password");
+
+      server.bcrypt.compare(password, res.rows[0].pw_hash, function(err, res) {
+        if (res) {
+          console.log("authenticate pass");
+          next();
+
+          // TODO remove password from request before proceeding?
+        } else {
+          console.log("authenticate fail");
+
+          // TODO send response back failed login
+        }
+      });
+    }
+  }).catch(err => {
+		console.log(err);
+		response.sendStatus(500);
+	});
+}
+
+
+
+
+
+
+
+
+
 // middleware to authenticate an api call
 module.exports.authenticateApi = function(request, response, next) {
   console.log("authenticating api call");
@@ -63,7 +107,7 @@ module.exports.authenticateApi = function(request, response, next) {
     } else {
       console.log("Successfully decoded");
       // Add decrypted jwt token to pass on to func in case we need it, though we
-      // probably can omit this 
+      // probably can omit this
       request.decoded = decoded;
       return next();
     }

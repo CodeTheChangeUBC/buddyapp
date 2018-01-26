@@ -75,18 +75,21 @@ describe('ScoreSpec', function() {
      });
 
     it('score should decrease as distance from each other increases', function()  {
-        var person1 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.987, -130.123, 48.193, -130.122, 5);
-        var person2 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.986, -130.122, 48.190, -130.121, 5);
+       // both people going from IKB to Vanier
+        var person1 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.2676715, -123.2523644, 49.2647381, -123.258673, 5);
+        var person2 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.2676715, -123.2523644, 49.2647381, -123.258673, 5);
         var value1 = score(person1, person2);
         value1.should.be.within(0, Number.POSITIVE_INFINITY);
 
-        var person3 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 50.987, -130.123, 49.193, -130.122, 5);
-        var person4 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.986, -130.122, 48.190, -130.121, 5);
+       // both leaving from IKB, one going to Vanier and one going to Totem Park
+        var person3 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.2676715, -123.2523644, 49.2647381, -123.258673, 5);
+        var person4 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.2676715, -123.2523644, 49.2580479, -123.2530564, 5);
         var value2 = score(person3, person4);
         value2.should.be.below(value1);
 
-        var person5 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 51.987, -130.123, 49.193, -130.122, 5);
-        var person6 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.986, -130.122, 48.190, -130.121, 5);
+       // one leaving from Koerner and going to Vanier, another leaving from IKB and going to Totem Park
+        var person5 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.2681686, -123.2577932, 49.2647381, -123.258673, 5);
+        var person6 = new Person("female", "female", "2017-10-19 19:00", "2017-10-19 21:00", 49.2676715, -123.2523644, 49.2580479, -123.2530564, 5);
         var value3 = score(person5, person6);
         value3.should.be.below(value2);
     });

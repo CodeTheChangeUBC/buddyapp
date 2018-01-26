@@ -84,7 +84,13 @@ function queryDatabase(response, callback){
 }
 
 //Call search every 5 minutes
-//TODO: Implement datab
+//TODO: Implement functions to:
+//     -Pull all current searches from database and make list of User objects to match over (controllers/get-search-controller.js)
+//     -Run search.js over the list of Users.
+//     -Need a function to order Users based on who is dropped off first.
+//     -Need a function to make entries into the trip table after they have been ordered.
+//     -Need a controller to respond to polls
+
 setInterval(function(){
 //Grab user data from database and create array
 //Function to grab threshold

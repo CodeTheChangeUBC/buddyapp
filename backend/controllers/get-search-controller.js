@@ -4,16 +4,24 @@ var safewalkHubDict = require('./../safewalkHubDict.js');
 var search = require("./../search.js");
 //Grabs search data from db and returns an array of User objects populated with score data.
 module.exports.getSearchData = function(){
-	client.query("SELECT * FROM search").then(res => {
-		var rows = res.rows
+	client.query("SELECT public.users.gender, public.search.* from public.users inner join public.search on public.users.id = public.search.user_id").then(res => {
+		var rows = res.rows;
 		//array of users
 		var users = new Array();
 		//array of userScores
 		var userScores = new Array();
+		//array of Persons (so we don't need to keep making person objects)
+		var persons = new Array();
 		if(rows.length > 0){
 			//make userScores a 2d array
 			for(var i = 0; i < rows.length; i++){
 				userScores.push(new Array());
+			}
+			for(var i = 0; i < rows.length; i++){
+				var lat1 = safewalkHubDict[r.start_loc].lat;
+				var lon1 = safewalkHubDict[r.start_loc].lon;
+				var p1 = new Person(r.gender, r.gender_pref, r.time_start, r.time_end, lat1, lon1, r.dest_lat, r.dest_lon, 1);
+				persons.push(p1);			
 			}
 			//populate userScores
 			for(var i = 0; i < rows.length; i++){
@@ -35,14 +43,10 @@ module.exports.getSearchData = function(){
 				var r = rows[i];
 				//Need start_lat and start_lon from start_loc (safewalk hub) in table
 				//For now it is forestry
-				var lat1 = safewalkHubDict[r.start_loc].lat;
-				var lon1 = safewalkHubDict[r.start_loc].lon;
-				var p1 = new Person(r.gender, r.gender_pref, r.time_start, r.time_end, lat1, lon1, r.dest_lat, r.dest_lon, 1);
+				var p1 = persons[i]
 				for(var o = i+1, o < rows.length; o++){
 					r = rows[o];
-					var lat2 = safewalkHubDict[r.start_loc].lat;
-					var lon2 = safewalkHubDict[r.start_loc].lon;
-					var p2 = new Person(r.gender, r.gender_pref, r.time_start, r.time_end, lat2, lon2, r.dest_lat, r.dest_lon, 1);
+					var p2 = persons[o];
 					var s = score.score(p1, p2);
 					userScores[i][o] = s;
 					userScores[o][i] = s;
@@ -53,6 +57,7 @@ module.exports.getSearchData = function(){
 				users.push(u);
 			}
 		}
+		return users;
 	});
 
 }

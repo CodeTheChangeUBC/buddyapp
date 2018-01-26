@@ -54,7 +54,7 @@ app.post('/api/authenticate',authenticateController.authenticateLogin);
 // TODO pass all API calls through middleware authenticateController.authenticateApi
 // to verify JWT before continuing, done to secure endpoints
 // TODO login can also be verified this way, authenitcateLogin2
-app.post('/api/search', authenticateController.authenticateApi ,searchController.search);
+app.post('/api/search', authenticateController.authenticateApi,searchController.search);
 app.listen(8012);
 
 

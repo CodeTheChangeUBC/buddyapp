@@ -4,7 +4,7 @@ var safewalkHubDict = require('./../safewalkHubDict.js');
 var search = require("./../search.js");
 //Grabs search data from db and returns an array of User objects populated with score data.
 module.exports.getSearchData = function(){
-	client.query("SELECT public.users.gender, public.search.* from public.users inner join public.search on public.users.id = public.search.user_id").then(res => {
+	client.query("SELECT users.gender, search.* FROM users INNER JOIN search ON users.id = search.user_id").then(res => {
 		var rows = res.rows;
 		//array of users
 		var users = new Array();
@@ -18,10 +18,11 @@ module.exports.getSearchData = function(){
 				userScores.push(new Array());
 			}
 			for(var i = 0; i < rows.length; i++){
+				
 				var lat1 = safewalkHubDict[r.start_loc].lat;
 				var lon1 = safewalkHubDict[r.start_loc].lon;
-				var p1 = new Person(r.gender, r.gender_pref, r.time_start, r.time_end, lat1, lon1, r.dest_lat, r.dest_lon, 1);
-				persons.push(p1);			
+				var p = new Person(r.gender, r.gender_pref, r.time_start, r.time_end, lat1, lon1, r.dest_lat, r.dest_lon, 1);
+				persons.push(p);			
 			}
 			//populate userScores
 			for(var i = 0; i < rows.length; i++){
@@ -41,8 +42,6 @@ module.exports.getSearchData = function(){
 				 * @constructor
 				 */
 				var r = rows[i];
-				//Need start_lat and start_lon from start_loc (safewalk hub) in table
-				//For now it is forestry
 				var p1 = persons[i]
 				for(var o = i+1, o < rows.length; o++){
 					r = rows[o];
@@ -59,5 +58,4 @@ module.exports.getSearchData = function(){
 		}
 		return users;
 	});
-
 }

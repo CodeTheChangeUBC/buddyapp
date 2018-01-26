@@ -37,6 +37,10 @@ module.exports = Person;
  *          1: means the two people are a perfect match
  */
 function score(person1, person2) {
+    // check same person
+    if (person1 == person2) {
+        return 1;
+    }
 
     // GENDER MATCH
     var gender_match = ((person1.gender_pref === person2.gender || person1.genderpref === 0) &&

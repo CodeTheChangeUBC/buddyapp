@@ -34,6 +34,8 @@ module.exports = client;
 var authenticateController=require('./controllers/authenticate-controller');
 var registerController=require('./controllers/register-controller');
 var searchController=require('./controllers/search-controller');
+var getSearchController = require("./controllers/get-search-controller.js");
+
 
 //So we can parse body data of http requests
 app.use(bodyParser.urlencoded({extended:true}));
@@ -83,19 +85,17 @@ function queryDatabase(response, callback){
         });
 }
 
-//Call search every 5 minutes
+//Calls search every 5 minutes
 //TODO: Implement functions to:
-//     -Pull all current searches from database and make list of User objects to match over (controllers/get-search-controller.js)
-//     -Run search.js over the list of Users.
 //     -Need a function to order Users based on who is dropped off first.
 //     -Need a function to make entries into the trip table after they have been ordered.
-//     -Need a controller to respond to polls
+//     -Need a separate controller to respond to get requests from the frontend
 
 setInterval(function(){
-//Grab user data from database and create array
-//Function to grab threshold
-//var group = search.searchMatrix(arr, threshold);
-//function to send off the group (Must communicate with frontend)
+    var group = search.searchMatrix(getSearchController.getSearchData(), 1);
+    if(group.length > 0){
+        //TODO: Function to put group in the trip table
+    }
 }, 300000);
 
 var googleMapsClient = require('@google/maps').createClient({

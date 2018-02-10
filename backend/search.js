@@ -6,12 +6,16 @@
  * @param {0, 1} walkAlone
  * @param {Number} minSize
  * @param {Array<Number>} data
+ * @param {Timestamp} time_start
+ * @param {Timestamp} time_end
  */
-function User(userId, walkAlone, minSize, data){
+function User(userId, walkAlone, minSize, data, time_start, time_end){
 	this.userId = userId;
 	this.walkAlone = walkAlone;
 	this.size = minSize;
 	this.data = data;
+	this.time_start = time_start;
+	this.time_end = time_end;
 }
 
 /** 

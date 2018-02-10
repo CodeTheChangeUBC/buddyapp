@@ -5,7 +5,6 @@ const search=require('./search.js');
 const bcrypt = require('bcrypt');
 module.exports.bcrypt = bcrypt;
 
-
 const app = express();
 
 const connection = {

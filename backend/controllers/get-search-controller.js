@@ -41,7 +41,7 @@ module.exports.getSearchData = function(){
 				 * @constructor
 				 */
 				var r = rows[i];
-				var p1 = persons[i]
+				var p1 = persons[i];
 				for(var o = i+1, o < rows.length; o++){
 					r = rows[o];
 					var p2 = persons[o];
@@ -51,7 +51,7 @@ module.exports.getSearchData = function(){
 				}
 				//Make a new user and add it to our user array
 				//TODO: Fix constructor parameters
-				var u = new User(r.user_id, r.walk_alone, r.minSize, userScores[i]);
+				var u = new User(r.user_id, r.walk_alone, r.minSize, userScores[i], r.time_start, r.time_end);
 				users.push(u);
 			}
 		}

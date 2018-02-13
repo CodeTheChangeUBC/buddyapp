@@ -24,8 +24,9 @@ module.exports.addTrips=function(group){
  	var diff = Math.abs(minEndDate - maxStartDate);
  	//Average it
  	diff = diff/2;
- 	//Add it to minStartDate and make the trueStartTime
- 	var trueStartMS = minStartDate.getTime() + diff;
+ 	//Add it to maxStartDate and make the trueStartTime
+ 	var trueStartMS = maxStartDate.getTime() + diff;
+ 	//This is the actual start time that we send the group out at.
  	var trueStartTime = new Date(trueStartMS);
 
 	//TODO: query database to add a trip entry for all users in group

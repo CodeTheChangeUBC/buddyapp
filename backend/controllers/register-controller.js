@@ -28,7 +28,7 @@ module.exports.register=function(req,res) {
       });    // TODO is this what we want to send back on err?
     } else {
 
-      // TODO uuid() as secret key;
+      var secretKey = 'secretkeyTODO'; // TODO create single secretkey for all jwt
       var token = client.jwt.sign({email: request.body.email}, 'secretkeyTODO');
 
 
@@ -67,7 +67,7 @@ module.exports.register=function(req,res) {
 
 
 
-// the old code 
+// the old code
 
 /*
 

@@ -3,6 +3,7 @@ const express=require("express");
 var bodyParser=require('body-parser');
 const search=require('./search.js');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 module.exports.bcrypt = bcrypt;
 
 const app = express();

@@ -149,12 +149,5 @@ function minsAcross(row1, row2){
 }
 
 module.exports = {
-	searchMatrix,
-	User,
-	arrayContains,
-	checkConditions,
-	checkWalkAlone,
-	checkSize,
-	removeIndex,
-	minsAcross
+	searchMatrix
 }

@@ -2,8 +2,8 @@ var client = require(./../server.js);
 
 //Function to add a row in the Trip table for every User object in group using a calculated start time.
 module.exports.addTrips=function(group){
-	var max_start = group[0].time_start;
-	var min_end = group[0].time_end;
+	var max_start = group[0].time_start;        // max start - latest start time
+	var min_end = group[0].time_end;            // min end - earliest end time
 	for(var i = 0; i < group.length; i++){
 		if(group[i].time_start > max_start){
 			max_start = group[i].time_start;
@@ -26,7 +26,7 @@ module.exports.addTrips=function(group){
  	diff = diff/2;
  	//Add it to maxStartDate and make the trueStartTime
  	var trueStartMS = maxStartDate.getTime() + diff;
- 	//This is the actual start time that we send the group out at.
+ 	//This is the actual start time that we send the group out at
  	var trueStartTime = new Date(trueStartMS);
 
 	//TODO: query database to add a trip entry for all users in group
@@ -41,5 +41,10 @@ module.exports.addTrips=function(group){
  	* @param {Timestamp} time_start
  	* @param {Timestamp} time_end
  	*/
-
+    for (var i = 0; i < group.length; i++) {
+        var person = group[i];
+        var code = Math.floor(Math.random() * 10000); // generates random code between 0 and 9999
+        var trip = new Trip(id, toISOSTring(trueStartTime), code, 0, person.id, person.id);
+        trip.push(trip);
+    }
 }

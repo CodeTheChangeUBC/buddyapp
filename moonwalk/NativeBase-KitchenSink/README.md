@@ -12,6 +12,8 @@ This project is currently inside of a Native-base template and can be navigated 
 * block.js in the button screen
 * rounded.js in the button screen
 
+To find the login page and what was started of the google maps page, go under mark's branch and you should find those screens in the src folder.
+
 # TODO
 * integrate frontend with backend
 * clean up invision images for background use

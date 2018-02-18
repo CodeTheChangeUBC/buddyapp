@@ -1,5 +1,5 @@
 const client = require('./../server.js');
-const jwtGenerator = require('./../jwt-generator.js');
+const jwtGenerator = require('./jwt-generator.js');
 
 module.exports.register=function(req,res) {
   var users={

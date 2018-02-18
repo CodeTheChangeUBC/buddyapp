@@ -1,5 +1,5 @@
 var client = require('./../server.js');
-const jwtGenerator = require('./../jwt-generator.js');
+const jwtGenerator = require('./jwt-generator.js');
 
 
 //var nJwt = require('njwt'); // outdated, we using jwsonwebtoken now
@@ -22,8 +22,8 @@ module.exports.authenticateLogin = function(request, response, next) {
     } else {
       console.log("verifying password");
 
-      server.bcrypt.compare(password, res.rows[0].pw_hash, function(error, response) {
-        if (response) {
+      server.bcrypt.compare(password, res.rows[0].pw_hash, function(error, res) {
+        if (res) {
           console.log("authenticate pass");
           response.jwt = jwtGenerator.generateJWT(res.rows[0].id);
 
@@ -75,7 +75,7 @@ module.exports.authenticateApi = function(request, response, next) {
       // allegedly...
 
       // if user's jwt is within 2 days of expiring, refresh the expiry date
-      // TODO do not refresh if user changed password????? 
+      // TODO do not refresh if user changed password?????
       if (decoded.exp - currentTime < 172800 ) {
         response.jwt = jwtGenerator.generateJWT(decoded.user_id);
       } else {

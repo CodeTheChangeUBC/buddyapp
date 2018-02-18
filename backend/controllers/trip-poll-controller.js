@@ -10,10 +10,22 @@ module.exports.tripPoll=function(id, res) {
   /** DO SOMETHING TO CHECK IF PENDING**/
   const query = `SELECT public.trip.status, public.trip.user_id FROM public.trip WHERE user_id = ${id}`;
 
-  client.query(query);
-  //next steps: we plan on implementing the following
-  //1) send query
-  //2) receive response (the value of status)
-  //3) set pending to TRUE if status is 0
+  client.query(query, function (error, results, fields) {
+			if (error) {
+				console.log("error occurred during trip insertion", error);
+				res.json({
+					status: false,
+					message: 'there was some error with insert query'
+				})
+			} else {
+				res.json({
+					status: true,
+					data: results,
+					message: 'trip insertion successful'
+				})
+			}
+	});
+
+  // we have to set pending somehow
   return pending;
 }

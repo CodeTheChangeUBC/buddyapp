@@ -42,7 +42,7 @@ module.exports.addTrips = function (group) {
 		const timeEnd = person.time_end;
 		// TODO: do we have a proper security code?
 		const securityCode = Math.floor(Math.random() * 10000);
-		const status = person.status;
+        const status = 0;
 		const userId = person.user_id;
 
 		const query = 'INSERT INTO trip(time_start, time_end, security_code, status, user_ids, user_id) VALUES($1, $2, $3, $4, $5, $6)';

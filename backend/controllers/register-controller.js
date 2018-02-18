@@ -35,9 +35,7 @@ module.exports.register=function(req,res) {
       client.query('INSERT INTO users(username, pw_hash, first_name, last_name, gender, email) values($1, $2, $3, $4, $5, $6)',
           [users.username, hash, users.first_name, users.last_name, users.gender, users.email], function(error,results,fields) {
 
-
-        var userId = "temp"; // TODO get user id from database 
-        var token = jwtGenerator.generateJWT(userId);
+        var token = jwtGenerator.generateJWT(results.rows[0].id);
 
         if(error) {
           console.log("error occurred");

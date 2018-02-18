@@ -1,4 +1,5 @@
 const client = require('./../server.js');
+const jwtGenerator = require('./../jwt-generator.js');
 
 module.exports.register=function(req,res) {
   var users={
@@ -29,12 +30,14 @@ module.exports.register=function(req,res) {
     } else {
 
       var secretKey = 'secretkeyTODO'; // TODO create single secretkey for all jwt
-      var token = client.jwt.sign({email: request.body.email}, 'secretkeyTODO');
-
 
       // TODO insert UUID into database
       client.query('INSERT INTO users(username, pw_hash, first_name, last_name, gender, email) values($1, $2, $3, $4, $5, $6)',
           [users.username, hash, users.first_name, users.last_name, users.gender, users.email], function(error,results,fields) {
+
+
+        var userId = "temp"; // TODO get user id from database 
+        var token = jwtGenerator.generateJWT(userId);
 
         if(error) {
           console.log("error occurred");

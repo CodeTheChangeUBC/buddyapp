@@ -1,4 +1,6 @@
 var client = require('./../server.js');
+const jwtGenerator = require('./../jwt-generator.js');
+
 
 //var nJwt = require('njwt'); // outdated, we using jwsonwebtoken now
 const uuid = require('uuid/v4')
@@ -20,9 +22,11 @@ module.exports.authenticateLogin = function(request, response, next) {
     } else {
       console.log("verifying password");
 
-      server.bcrypt.compare(password, res.rows[0].pw_hash, function(err, res) {
-        if (res) {
+      server.bcrypt.compare(password, res.rows[0].pw_hash, function(error, response) {
+        if (response) {
           console.log("authenticate pass");
+          response.jwt = jwtGenerator.generateJWT(res.rows[0].id);
+
           next();
 
           // TODO remove password from request before proceeding?
@@ -62,6 +66,23 @@ module.exports.authenticateApi = function(request, response, next) {
       // Add decrypted jwt token to pass on to func in case we need it, though we
       // probably can omit this
       request.decoded = decoded;
+
+      // TODO verify date format
+      var currentTime = new Date().getTime() / 1000;  // convert to seconds since epoch
+
+      // 172800 is 2 days in seconds
+      // jwt.exp is in NumericDate format, which is seconds since epoch
+      // allegedly...
+
+      // if user's jwt is within 2 days of expiring, refresh the expiry date
+      // TODO do not refresh if user changed password????? 
+      if (decoded.exp - currentTime < 172800 ) {
+        response.jwt = jwtGenerator.generateJWT(decoded.user_id);
+      } else {
+        response.jwt = request.body.jwt;
+      }
+
+
       return next();
     }
   });

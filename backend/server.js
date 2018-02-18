@@ -35,7 +35,7 @@ var authenticateController=require('./controllers/authenticate-controller');
 var registerController=require('./controllers/register-controller');
 var searchController=require('./controllers/search-controller');
 var getSearchController = require("./controllers/get-search-controller.js");
-
+var tripPutController = require("./controllers/trip-put-controller.js");
 
 //So we can parse body data of http requests
 app.use(bodyParser.urlencoded({extended:true}));
@@ -51,6 +51,8 @@ router.get('/', function(req, res) {
 
 /* routes to handle api requests using above controllers*/
 app.post('/api/register',registerController.register);
+app.post('/api/authenticate',authenticateController.authenticateLogin);
+
 app.post('/api/authenticate',authenticateController.authenticateLogin);
 
 // TODO pass all API calls through middleware authenticateController.authenticateApi
@@ -94,7 +96,7 @@ function queryDatabase(response, callback){
 setInterval(function(){
     var group = search.searchMatrix(getSearchController.getSearchData(), 1);
     if(group.length > 0){
-        //TODO: Function to put group in the trip table
+        tripPutController.addTrips(group);
     }
 }, 300000);
 

@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "sdkVersion": "23.0.0",
+    "icon": "http://nativebase.io/assets/img/front-page-icon.png",
+    "slug": "nativebasekitchensink",
+    "loading": {
+      "hideExponentText": true,
+      "backgroundImage": "./assets/splashscreen.png"
+    },
+    "orientation": "portrait",
+    "primaryColor": "#cccccc",
+    "packagerOpts": {
+      "assetExts": [
+        "ttf"
+      ]
+    },
+    "androidStatusBarColor": "#334393",
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#334393"
+    }
+  }
+}

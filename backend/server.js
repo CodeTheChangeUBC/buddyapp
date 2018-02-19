@@ -55,47 +55,21 @@ app.post('/api/authenticate',authenticateController.authenticateLogin);
 
 app.post('/api/authenticate',authenticateController.authenticateLogin);
 
-// TODO pass all API calls through middleware authenticateController.authenticateApi
+// TODO: pass all API calls through middleware authenticateController.authenticateApi
 // to verify JWT before continuing, done to secure endpoints
-// TODO login can also be verified this way, authenitcateLogin2
+// TODO: login can also be verified this way, authenitcateLogin2
 app.post('/api/search', authenticateController.authenticateApi,searchController.search);
 app.listen(8012);
 
-
-function queryDatabase(response, callback){
-    console.log("Running query to PostgreSQL server: ${config.host}");
-
-    var JSONString = "";
-
-    const query = 'SELECT * FROM inventory;';
-
-    client.query(query)
-        .then(res => {
-            const rows = res.rows;
-            rows.map(row => {
-                JSONString += JSON.stringify(row);
-                //console.log(returnString);
-                //console.log('Read: ${JSON.stringify(row)}');
-            });
-
-            callback(response, JSONString);
-            //process.exit(); NOTE this terminates the server
-
-        })
-        .catch(err => {
-            console.log(err);
-        });
-}
-
 //Calls search every 5 minutes
 //TODO: Implement functions to:
-//     -Need a function to order Users based on who is dropped off first.
-//     -Need a function to make entries into the trip table after they have been ordered.
-//     -Need a separate controller to respond to get requests from the frontend
+//     -order Users based on who is dropped off first.
+//     -respond to get requests from the frontend
 
 setInterval(function(){
     var group = search.searchMatrix(getSearchController.getSearchData(), 1);
     if(group.length > 0){
+    	//TODO: Order the group before putting it in the trip table
         tripPutController.addTrips(group);
     }
 }, 300000);

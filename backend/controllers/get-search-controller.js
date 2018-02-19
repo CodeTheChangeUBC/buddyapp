@@ -20,7 +20,7 @@ module.exports.getSearchData = function(){
 			for(var i = 0; i < rows.length; i++){
 				var lat1 = safewalkHubDict[r.start_loc].lat;
 				var lon1 = safewalkHubDict[r.start_loc].lon;
-				var p = new Person(r.gender, r.gender_pref, r.time_start, r.time_end, lat1, lon1, r.dest_lat, r.dest_lon, 1);
+				var p = new score.Person(r.gender, r.gender_pref, r.time_start, r.time_end, lat1, lon1, r.dest_lat, r.dest_lon, 1);
 				persons.push(p);
 			}
 			//populate userScores
@@ -51,7 +51,7 @@ module.exports.getSearchData = function(){
 				}
 				//Make a new user and add it to our user array
 				//TODO: Fix constructor parameters
-				var u = new User(r.user_id, r.walk_alone, r.minSize, userScores[i], r.time_start, r.time_end);
+				var u = new search.User(r.user_id, r.walk_alone, r.minSize, userScores[i], r.time_start, r.time_end);
 				users.push(u);
 			}
 		}

@@ -11,28 +11,28 @@ users = {
       lat: 40,
       lon: 40
     },
-    canWalkAlone: false
+    walkAlone: false
   },
   "B": {
     dest: {
       lat: 50,
       lon: 50
     },
-    canWalkAlone: true
+    walkAlone: true
   },
   "C": {
     dest: {
       lat: 60,
       lon: 60
     },
-    canWalkAlone: true
+    walkAlone: true
   },
   "D": {
     dest: {
       lat: 70,
       lon: 70
     },
-    canWalkAlone: false
+    walkAlone: false
   }
 }
 
@@ -52,7 +52,7 @@ function getDistance(destA, destB) {
 function someoneRemaining(remainingUsers, users, toPop) {
   remaining = false;
   for (var i = 0; i < remainingUsers.length; i++) {
-    if (remainingUsers[i] != toPop && users[remainingUsers[i]].canWalkAlone) {
+    if (remainingUsers[i] != toPop && users[remainingUsers[i]].walkAlone) {
       remaining = true;
       break;
     }

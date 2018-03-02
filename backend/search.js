@@ -8,14 +8,20 @@
  * @param {Array<Number>} data
  * @param {Timestamp} time_start
  * @param {Timestamp} time_end
+ * @param {Number} latitude
+ * @param {Number} longitude
  */
-function User(userId, walkAlone, minSize, data, time_start, time_end){
+function User(userId, walkAlone, minSize, data, time_start, time_end, latitude, longitude){
 	this.userId = userId;
 	this.walkAlone = walkAlone;
 	this.size = minSize;
-	this.data = data;
+	this.data = data;			//userScores
 	this.time_start = time_start;
 	this.time_end = time_end;
+	this.dest = {
+		lat: latitude,
+		lon: longitude
+	}
 }
 
 /** 

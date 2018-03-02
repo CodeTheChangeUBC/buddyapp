@@ -51,7 +51,7 @@ module.exports.getSearchData = function(){
 				}
 				//Make a new user and add it to our user array
 				//TODO: Fix constructor parameters
-				var u = new search.User(r.user_id, r.walk_alone, r.minSize, userScores[i], r.time_start, r.time_end);
+				var u = new search.User(r.user_id, r.walk_alone, r.minSize, userScores[i], r.time_start, r.time_end, r.dest_lat, r.dest_long);
 				users.push(u);
 			}
 		}

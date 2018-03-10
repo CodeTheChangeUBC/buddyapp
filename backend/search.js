@@ -1,30 +1,6 @@
 "use strict";
 
-/** 
- * Constructor for a user
- * @param {Number} userId
- * @param {0, 1} walkAlone
- * @param {Number} minSize
- * @param {Array<Number>} data
- * @param {Timestamp} time_start
- * @param {Timestamp} time_end
- * @param {Number} latitude
- * @param {Number} longitude
- */
-function User(userId, walkAlone, minSize, data, time_start, time_end, latitude, longitude){
-	this.userId = userId;
-	this.walkAlone = walkAlone;
-	this.size = minSize;
-	this.data = data;			//userScores
-	this.time_start = time_start;
-	this.time_end = time_end;
-	this.dest = {
-		lat: latitude,
-		lon: longitude
-	}
-}
-
-/** 
+/**
  * Returns an Array of User objects representing a group. Can be an empty Array if no acceptable matches are found.
  * Does not modify the full array of users. (They must be removed later)
  * @param {Array<User>} arr
@@ -140,7 +116,7 @@ function checkSize(array){
 	return array;
 }
 
-//Removes element of given array at index specified 
+//Removes element of given array at index specified
 function removeIndex(array, index){
 	array.splice(index, 1);
 }

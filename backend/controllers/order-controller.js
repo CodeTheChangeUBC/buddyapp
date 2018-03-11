@@ -35,6 +35,7 @@ function sortDropoffs(startLat, startLon, users) {
     return({persons: order, startLat: startLat, startLon: startLon});
 }
 
+module.exports = sortDropoffs;
 //---------------------------------------Helper Methods--------------------------------
 
 /*

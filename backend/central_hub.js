@@ -32,4 +32,4 @@ function get_central_hub (peopleArray) {
     return closest_i;
 }
 
-module.exports = central_hub;
+module.exports = get_central_hub;

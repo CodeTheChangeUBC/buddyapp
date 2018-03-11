@@ -31,3 +31,5 @@ function Person(userId, gender, timeStart, timeEnd, startLat, startLong, destLat
     this.avgRating = avgRating;
     this.data = data;			//userScores
 }
+
+module.exports = Person;

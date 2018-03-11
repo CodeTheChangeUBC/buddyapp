@@ -1,9 +1,9 @@
 "use strict";
 
 /**
- * Returns an Array of User objects representing a group. Can be an empty Array if no acceptable matches are found.
+ * Returns an Array of Person objects representing a group. Can be an empty Array if no acceptable matches are found.
  * Does not modify the full array of users. (They must be removed later)
- * @param {Array<User>} arr
+ * @param {Array<Person>} arr
  * @param {Number} threshold
 */
 function searchMatrix(arr, threshold){

@@ -4,7 +4,11 @@ var bodyParser=require('body-parser');
 const search=require('./search.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
-const search-put = require('./search-put-controller.js');
+const searchPut = require('./controllers/search-put-controller.js');
+const tripPut = require('./controllers/trip-put-controller.js');
+const order = require('./controllers/order-controller.js');
+const findHub = require('./central_hub.js');
+const swHubs = require('./safewalkHubDict.js')
 module.exports.bcrypt = bcrypt;
 
 const app = express();
@@ -70,8 +74,10 @@ app.listen(8012);
 setInterval(function(){
     var group = search.searchMatrix(getSearchController.getSearchData(), 1);
     if(group.length > 0){
-    	//TODO: Order the group before putting it in the trip table
-        tripPutController.addTrips(group);
+        var hubInd = findHub.get_central_hub(group);
+        var hub = swHubs.safewalkHubDict[hubInd];
+        //TODO: refactor tripPut to deal with sortDropoffs return of {group, startlat, startlon}
+        tripPut.addTrips(order.sortDropoffs(hub.lat, hub.lon, group));
     }
 }, 300000);
 

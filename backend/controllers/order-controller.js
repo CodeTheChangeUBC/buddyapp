@@ -1,46 +1,58 @@
-// startlocation, user:destination, user:canWalkAlone
+/*
+* given a starting location, sorts users in the order they should be dropped off
+* @param startLocation: starting location
+* @param users: {Array<User>} array of users
+*/
+function sortDropoffs(startLat, startLon, users) {
+    order = []; // array of persons
+    remainingUsers = users;
+    newLat = startLat;
+    newLon = startLon;
+    while (remainingUsers.length > 1) {
+        distances = [];
+        for (var i = 0; i < remainingUsers.length; i++) {
+            distances.push({
+                userID: remainingUsers[i],
+                distance: getDistance(startLat, startLon, remainingUsers[i].destLat, remainingUsers[i].destLong)
+            })
+        }
 
-startLocation = {
-    lat: 30,
-    lon: 30
+        distances.sort((a, b) => {
+            return a.distance > b.distance;
+        });
+
+        if (someoneRemaining(remainingUsers, users, getUser(user, distances[0].userID))) {
+            order.push(popUser(remainingUsers, distances[0].userID));
+            newLat = getUser(users, distance[0].userId).destLat;
+            newLon = getUser(users, distance[0].userId).destLon;
+        } else {
+            order.push(popUser(remainingUsers, distances[1].userID));
+            newLat = getUser(users, distance[1].userId).destLat;
+            newLon = getUser(users, distance[1].userId).destLon;
+        }
+    }
+    order.push(remainingUsers[0]);
+    return({persons: order, startLat: startLat, startLon: startLon});
 }
 
-users = {
-  "A": {
-    dest: {
-      lat: 40,
-      lon: 40
-    },
-    walkAlone: false
-  },
-  "B": {
-    dest: {
-      lat: 50,
-      lon: 50
-    },
-    walkAlone: true
-  },
-  "C": {
-    dest: {
-      lat: 60,
-      lon: 60
-    },
-    walkAlone: true
-  },
-  "D": {
-    dest: {
-      lat: 70,
-      lon: 70
-    },
-    walkAlone: false
-  }
-}
+//---------------------------------------Helper Methods--------------------------------
 
 /*
 * return distance between destA and destB
 */
-function getDistance(destA, destB) {
-  return Math.sqrt(Math.pow(destA.lat - destB.lat, 2) + Math.pow(destA.lon - destB.lon, 2))
+function getDistance(destLatA, destLonA, destLatB, destLonB) {
+    return Math.sqrt(Math.pow(destLatA - destLatB, 2) + Math.pow(destLonA - destLonB, 2))
+}
+
+/*
+* get user given userId
+*/
+function getUser(users, userId) {
+    for (user : users) {
+        if (user.userId == userId) {
+            return user;
+        }
+    }
 }
 
 /*
@@ -50,59 +62,22 @@ function getDistance(destA, destB) {
 * @param toPop: the user we want to pop (but aren't sure whether we can)
 */
 function someoneRemaining(remainingUsers, users, toPop) {
-  remaining = false;
-  for (var i = 0; i < remainingUsers.length; i++) {
-    if (remainingUsers[i] != toPop && users[remainingUsers[i]].walkAlone) {
-      remaining = true;
-      break;
+    remaining = false;
+    for (var i = 0; i < remainingUsers.length; i++) {
+        if (remainingUsers[i].userId != toPop.userId && remainingUsers[i].walkAlone) {
+            remaining = true;
+            break;
+        }
     }
-  }
-  return remaining;
+    return remaining;
 }
 
 /*
 * pops the user from remainingUsers
+* @param remainingUsers: array of users
+* @param toPop:
 */
 function popUser(remainingUsers, toPop) {
-  index = remainingUsers.indexOf(toPop);
-  return remainingUsers.splice(index, 1)[0];
+    index = remainingUsers.indexOf(toPop);
+    return remainingUsers.splice(index, 1);
 }
-
-/*
-* given a starting location, sorts users in the order they should be dropped off
-* @param startLocation: starting location
-* @param users: users in a group
-*/
-function sortDropoffs(startLocation, users) {
-    start = startLocation
-
-    order = [];
-    remainingUsers = Object.keys(users)
-    while (remainingUsers.length > 1) {
-
-      distances = [];
-      for (var i = 0; i < remainingUsers.length; i++) {
-        distances.push({
-          userID: remainingUsers[i],
-          distance: getDistance(start, users[remainingUsers[i]].dest)
-        })
-      }
-
-      distances.sort((a, b) => {
-        return a.distance > b.distance
-      });
-
-      if (someoneRemaining(remainingUsers, users, distances[0].userID)) {
-        order.push(popUser(remainingUsers, distances[0].userID))
-        start = users[distances[0].userID].dest
-      } else {
-        order.push(popUser(remainingUsers, distances[1].userID))
-        start = users[distances[1].userID].dest
-      }
-    }
-    order.push(remainingUsers[0])
-    console.log(order)
-}
-
-/* for testing */
-sortDropoffs(startLocation, users)

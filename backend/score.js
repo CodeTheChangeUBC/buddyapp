@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Computes a score for two people based on how well-matched they are.
  * @param {Person} person1
@@ -16,45 +14,42 @@ function score(person1, person2) {
     }
 
     // GENDER MATCH
-    var gender_match = ((person1.gender_pref === person2.gender || person1.genderpref === 0) &&
-                        (person1.gender === person2.gender_pref || person2.genderpref === 0));
+    var genderMatch = ((person1.genderPref === person2.gender || person1.genderPref === 0) &&
+                        (person1.gender === person2.genderPref || person2.genderPref === 0));
 
-    if (!gender_match) return Number.NEGATIVE_INFINITY;
+    if (!genderMatch) return Number.NEGATIVE_INFINITY;
 
     // DEPARTURE OVERLAP
-    var departure_overlap = ((person1.time_start <= person2.time_end && person2.time_start <= person1.time_end));
+    var departureOverlap = ((person1.timeStart <= person2.timeEnd && person2.timeStart <= person1.timeEnd));
 
-    if (!departure_overlap) return Number.NEGATIVE_INFINITY;
+    if (!departureOverlap) return Number.NEGATIVE_INFINITY;
 
     // RATING MATCH
     // between 0 (bad) and 1 (good)
-    var rating_score = (5 - Math.abs(person1.avg_rating - person2.avg_rating))/5;
+    var ratingScore = (5 - Math.abs(person1.avgRating - person2.avgRating))/5;
 
     // TRIP OVERLAP
     // between 0 (bad) and 1 (good)
-    var x_1 = getDistanceFromLatLonInKm(person1.start_lat,person1.start_long,person2.start_lat,person2.start_long)      // distance between person1 start and person2 start
-    var x_2 = getDistanceFromLatLonInKm(person1.start_lat,person1.start_long,person1.dest_lat,person1.dest_long)        // distance between person1 start and person1 end
-    var x_3 = getDistanceFromLatLonInKm(person2.start_lat,person2.start_long,person1.dest_lat,person1.dest_long)        // distance between person2 start and person1 end
-    var x_4 = getDistanceFromLatLonInKm(person1.start_lat,person1.start_long,person2.dest_lat,person2.dest_long)        // distance between person1 start and person2 end
-    var x_5 = getDistanceFromLatLonInKm(person2.start_lat,person2.start_long,person2.dest_lat,person2.dest_long)        // distance between person2 start and person2 end
-    var x_6 = getDistanceFromLatLonInKm(person1.dest_lat,person1.dest_long,person2.dest_lat,person2.dest_long)          // distance between person1 end and person2 end
+    var x1 = getDistanceFromLatLonInKm(person1.startLat,person1.startLong,person2.startLat,person2.startLong)      // distance between person1 start and person2 start
+    var x2 = getDistanceFromLatLonInKm(person1.startLat,person1.startLong,person1.destLat,person1.destLong)        // distance between person1 start and person1 end
+    var x3 = getDistanceFromLatLonInKm(person2.startLat,person2.startLong,person1.destLat,person1.destLong)        // distance between person2 start and person1 end
+    var x4 = getDistanceFromLatLonInKm(person1.startLat,person1.startLong,person2.destLat,person2.destLong)        // distance between person1 start and person2 end
+    var x5 = getDistanceFromLatLonInKm(person2.startLat,person2.startLong,person2.destLat,person2.destLong)        // distance between person2 start and person2 end
+    var x6 = getDistanceFromLatLonInKm(person1.destLat,person1.destLong,person2.destLat,person2.destLong)          // distance between person1 end and person2 end
 
     // calculate the shortest trip where two people meet at one start location, leave each other at one dest location
-    var dist_total = x_1 + x_6 + Math.min(x_2,x_4,x_3,x_5);
-    console.log("dist_total: " + dist_total);
+    var distTotal = x1 + x6 + Math.min(x2,x4,x3,x5);
 
     // compute ratio of distance travelled for each person travelling independently to two people taking trip together
-    var distance_match = (x_2+x_5)/(2*dist_total);
-    console.log("distance_match: " + distance_match);
+    var distanceMatch = (x2+x5)/(2*distTotal);
 
     // COMPUTE SCORE
     // between 0 (bad) and 1 (good)
-    return rating_score * 0.2 + distance_match * 0.8;
+    return ratingScore * 0.2 + distanceMatch * 0.8;
 }
 
 module.exports = score;
 
-// https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
     var R = 6371; // Radius of the earth in km
     var dLat = deg2rad(lat2-lat1);  // deg2rad below

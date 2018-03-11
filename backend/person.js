@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Constructor for a person.
  * @param userId

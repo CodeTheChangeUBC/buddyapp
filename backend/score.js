@@ -1,7 +1,5 @@
 "use strict";
 
-module.exports = Person;
-
 /**
  * Computes a score for two people based on how well-matched they are.
  * @param {Person} person1
@@ -69,6 +67,8 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
     var d = R * c; // Distance in km
     return d;
 }
+
+module.exports = getDistanceFromLatLonInKm;
 
 function deg2rad(deg) {
     return deg * (Math.PI/180)

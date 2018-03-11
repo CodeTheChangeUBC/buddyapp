@@ -6,6 +6,8 @@
 function sortDropoffs(startLat, startLon, users) {
     order = []; // array of persons
     remainingUsers = users;
+    newLat = startLat;
+    newLon = startLon;
     while (remainingUsers.length > 1) {
         distances = [];
         for (var i = 0; i < remainingUsers.length; i++) {
@@ -21,10 +23,12 @@ function sortDropoffs(startLat, startLon, users) {
 
         if (someoneRemaining(remainingUsers, users, getUser(user, distances[0].userID))) {
             order.push(popUser(remainingUsers, distances[0].userID));
-            start = getUser(users, distance[0].userId).dest;
+            newLat = getUser(users, distance[0].userId).destLat;
+            newLon = getUser(users, distance[0].userId).destLon;
         } else {
             order.push(popUser(remainingUsers, distances[1].userID));
-            start = getUser(users, distance[1].userId).dest;
+            newLat = getUser(users, distance[1].userId).destLat;
+            newLon = getUser(users, distance[1].userId).destLon;
         }
     }
     order.push(remainingUsers[0]);

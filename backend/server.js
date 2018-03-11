@@ -4,6 +4,7 @@ var bodyParser=require('body-parser');
 const search=require('./search.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
+const search-put = require('./search-put-controller.js');
 module.exports.bcrypt = bcrypt;
 
 const app = express();

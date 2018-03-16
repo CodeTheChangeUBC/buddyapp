@@ -23,6 +23,7 @@ module.exports = {
 		  }
 		});
 	},
+	
 // generate random string 20 chars
 	randString: function() {
 	  var text = "";
@@ -36,7 +37,7 @@ module.exports = {
 
 	replaceJSONToken: function replaceJSONToken(newToken) {
 		client.query('INSERT INTO users(JWT) values($1)',
-				[newToken], 
+				[newToken],
 				function(error,results,fields) {
 				if(error) {
 					console.log("JWT Replace error", error);
@@ -52,6 +53,6 @@ module.exports = {
 					})
 				}
 			});
-		
+
 	}
 };

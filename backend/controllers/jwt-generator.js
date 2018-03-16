@@ -5,5 +5,4 @@ module.exports.generateJWT = function (userId) {
   return client.jwt.sign({
     user_id: userId
   }, secretKey, { expiresIn: '7d' });
-
 }

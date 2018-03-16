@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Computes a score for two people based on how well-matched they are.
  * @param {Person} person1

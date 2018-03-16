@@ -37,7 +37,6 @@ function sortDropoffs(startLat, startLon, users) {
 
 module.exports = sortDropoffs;
 //---------------------------------------Helper Methods--------------------------------
-
 /*
 * return distance between destA and destB
 */

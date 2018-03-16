@@ -11,10 +11,6 @@ module.exports.register=function(req,res) {
     "email":req.body.email
   }
 
-
-
-
-
   // TODO verify email not already registered
 
   // Use bcrypt to encrypt user password, auto salting

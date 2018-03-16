@@ -1,7 +1,7 @@
 # BuddyApp
 
-Moonwalk, a mobile application, will help students form pairs or groups so that they can walk home together after dark. Since many 
-students who prefer to work at the library feel unsafe walking alone on campus, this app would allow them to conveniently meet others 
+Moonwalk, a mobile application, will help students form pairs or groups so that they can walk home together after dark. Since many
+students who prefer to work at the library feel unsafe walking alone on campus, this app would allow them to conveniently meet others
 who are taking a similar route at a similar time, and contribute together to making UBC a safer campus for everyone.
 
 # FAQ/Troubleshooting:
@@ -10,7 +10,7 @@ who are taking a similar route at a similar time, and contribute together to mak
 
 **API Calls**
 
-## Register New User
+### Register New User
 ---
     Adds a new user to the database based off the provided username, pw_hash, first_name, last_name, gender, email.
 
@@ -28,7 +28,7 @@ Post body format: (data to be send in "<>")
 }
 ```
 
-## Authenticate User
+### Authenticate User
 Provides access to the API by providing username and pw_hash
 
 ```no-highlight
@@ -41,7 +41,7 @@ Post body format: (data to be send in "<>")
 }
 ```
 
-## Searches for a Match
+### Searches for a Match
 Searches the a match given the user settings. Requires access from autheneticate.
 
 ```no-highlight

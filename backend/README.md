@@ -13,7 +13,7 @@
 - controller/user-put-controller.js: creates a new row in the user table
 
 # Objects/Types  
-Person: Object representing a current user  
+### Person: Object representing a current user  
 	- <Number> userID  
 	- <Number> gender (encoded)  
 	- <String> timeStart (UTC timestamp)  
@@ -29,34 +29,34 @@ Person: Object representing a current user
 
 # Numerical translations
 
-Users Table:  
-gender{  
+### Users Table:  
+#### gender{  
   0 : Other  
   1 : Male  
   2 : Female  
  }  
 
-Trip Table:  
-status{  
+### Trip Table:  
+#### status{  
   0 : Trip Pending  
   1 : Trip Ongoing  
   2 : Trip Cancelled  
   3 : Trip Complete  
 }  
 
-Search Table:  
-gender_pref{  
+### Search Table:  
+#### gender_pref{  
   0 : No Preference  
   1 : Male  
   2 : Female  
 }  
 
-walk_alone{  
+#### walk_alone{  
   0 : Not willing to walk alone.  
   1 : Willing to walk alone.  
 }  
 
-status{  
+#### status{  
   1 : Search Ongoing  
   2 : Search Cancelled  
   3 : Search Complete  

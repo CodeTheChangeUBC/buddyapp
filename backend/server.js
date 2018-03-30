@@ -8,7 +8,8 @@ const searchPut = require('./controllers/search-put-controller.js');
 const tripPut = require('./controllers/trip-put-controller.js');
 const order = require('./controllers/order-controller.js');
 const findHub = require('./central_hub.js');
-const swHubs = require('./safewalkHubDict.js')
+const swHubs = require('./safewalkHubDict.js');
+const getThreshold = require('./threshold.js');
 module.exports.bcrypt = bcrypt;
 
 const app = express();
@@ -58,8 +59,6 @@ router.get('/', function(req, res) {
 app.post('/api/register',registerController.register);
 app.post('/api/authenticate',authenticateController.authenticateLogin);
 
-app.post('/api/authenticate',authenticateController.authenticateLogin);
-
 // TODO: pass all API calls through middleware authenticateController.authenticateApi
 // to verify JWT before continuing, done to secure endpoints
 // TODO: login can also be verified this way, authenitcateLogin2
@@ -72,7 +71,9 @@ app.listen(8012);
 //     -respond to get requests from the frontend
 
 setInterval(function(){
-    var group = search.searchMatrix(getSearchController.getSearchData(), 1);
+	var unsearchedGroup = getSearchController.getSearchController();
+	var thresh = getThreshold(unsearchedGroup.length);
+    var group = search.searchMatrix(unsearchedGroup, thresh);
     if(group.length > 0){
         var hubInd = findHub.get_central_hub(group);
         var hub = swHubs.safewalkHubDict[hubInd];

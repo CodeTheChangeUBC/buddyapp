@@ -1,19 +1,19 @@
 "use strict";
 /**
  * Constructor for a person.
- * @param userId
- * @param gender
- * @param timeStart
- * @param timeEnd
- * @param startLat
- * @param startLong
- * @param destLat
- * @param destLong
- * @param walkAlone
- * @param genderPref
- * @param minSize
- * @param avgRating
- * @param data
+ * @param <Number> userId  
+ * @param <Number> gender
+ * @param <String> (UTC timestamp) timeStart
+ * @param <String> (UTC timestamp) timeEnd
+ * @param <Number> startLat
+ * @param <Number> startLong
+ * @param <Number> destLat
+ * @param <Number> destLong
+ * @param <Number> walkAlone
+ * @param <Number> genderPref
+ * @param <Number> minSize
+ * @param <Number> avgRating
+ * @param <Array<Number>> data
  * @constructor
  */
 function Person(userId, gender, timeStart, timeEnd, startLat, startLong, destLat, destLong, walkAlone, genderPref, minSize, avgRating, data) {

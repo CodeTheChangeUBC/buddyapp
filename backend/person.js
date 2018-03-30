@@ -19,8 +19,8 @@
 function Person(userId, gender, timeStart, timeEnd, startLat, startLong, destLat, destLong, walkAlone, genderPref, minSize, avgRating, data) {
     this.userId = userId;
     this.gender = gender;
-    this.timeStart = new Date(time_start);
-    this.timeEnd = new Date(time_end);
+    this.timeStart = new Date(timeStart);
+    this.timeEnd = new Date(timeEnd);
     this.startLat = startLat;
     this.startLong = startLong;
     this.destLat = destLat;

@@ -8,7 +8,8 @@ const searchPut = require('./controllers/search-put-controller.js');
 const tripPut = require('./controllers/trip-put-controller.js');
 const order = require('./controllers/order-controller.js');
 const findHub = require('./central_hub.js');
-const swHubs = require('./safewalkHubDict.js')
+const swHubs = require('./safewalkHubDict.js');
+const getThreshold = require('./threshold.js');
 module.exports.bcrypt = bcrypt;
 
 const app = express();
